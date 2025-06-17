@@ -8,22 +8,12 @@ import {
   FaGithub,
 } from "react-icons/fa";
 
-const containerVariant = {
-  hidden: {},
-  visible: {
-    transition: {
-      staggerChildren: 0.2,
-      delayChildren: 0.2,
-    },
-  },
-};
-
-const itemVariant = {
-  hidden: { opacity: 0, y: 30 },
+const fadeVariant = {
+  hidden: { opacity: 0, y: 20 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.8, ease: [0.25, 0.8, 0.25, 1] },
+    transition: { duration: 0.6, ease: "easeOut" },
   },
 };
 
@@ -32,13 +22,17 @@ export const About = () => {
     <section id="about" className="py-24 px-4 bg-background relative">
       <div className="container mx-auto max-w-6xl">
         <motion.div
-          variants={containerVariant}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
+          variants={{
+            visible: {
+              transition: { delay: 0.2, },
+            },
+          }}
           className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center"
         >
-          <motion.div variants={itemVariant} className="text-left">
+          <motion.div variants={fadeVariant} className="text-left">
             <h2 className="text-3xl md:text-4xl font-bold mb-6 text-foreground leading-tight">
               Sobre <span className="text-primary">Mim</span>
             </h2>
@@ -71,7 +65,7 @@ export const About = () => {
               </div>
             </div>
 
-            <motion.div className="flex gap-4 mb-8" variants={itemVariant}>
+            <motion.div className="flex gap-4 mb-8" variants={fadeVariant}>
               <a
                 href="https://linkedin.com/in/nandosabino"
                 target="_blank"
@@ -104,9 +98,9 @@ export const About = () => {
             <motion.a
               href="/meu-curriculo.pdf"
               download
-              variants={itemVariant}
+              variants={fadeVariant}
               aria-label="Baixar meu currículo"
-              className="inline-flex items-center gap-2 px-5 py-2 rounded-lg border border-primary text-primary hover:bg-primary hover:text-white hover:shadow-lg transition group"
+              className="inline-flex items-center gap-2 px-5 py-2 rounded-lg border border-primary text-primary hover:bg-primary hover:text-white transition group"
             >
               Confira meu CV
               <svg
@@ -126,9 +120,9 @@ export const About = () => {
           </motion.div>
 
           <motion.div
-            variants={itemVariant}
+            variants={fadeVariant}
             whileHover={{ scale: 1.02 }}
-            className="w-full h-full rounded-2xl overflow-hidden shadow-lg"
+            className="w-full h-full rounded-2xl overflow-hidden shadow-md"
           >
             <img
               src="/foto-de-perfil-teste.png"

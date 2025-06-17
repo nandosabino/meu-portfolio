@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 import { useEffect, useState } from "react";
-import { IoIosClose } from "react-icons/io";
-import { IoIosMenu } from "react-icons/io";
+import { IoIosClose, IoIosMenu } from "react-icons/io";
+import { motion, AnimatePresence } from "framer-motion";
 
 const navItems = [
   { name: "Início", href: "#hero" },
@@ -15,10 +15,7 @@ export const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
-    };
-
+    const handleScroll = () => setIsScrolled(window.scrollY > 10);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -30,60 +27,71 @@ export const Navbar = () => {
         isScrolled ? "py-3 bg-background/80 backdrop-blur-md shadow-xs" : "py-5"
       )}
     >
-      <div className="relative flex items-center px-6">
+      <div className="flex items-center justify-between px-6 max-w-7xl mx-auto relative">
         <a
           href="#hero"
-          className="text-4xl font-bold text-primary flex items-center"
+          className="text-4xl font-bold text-primary relative z-10"
+          aria-label="Voltar para o início"
         >
-          <span className="relative z-10">
-            <span className="text-foreground">Fernando</span>
-          </span>
+          <span className="text-foreground">Fernando</span>
         </a>
 
-        <div className="hidden md:flex absolute left-1/2 transform -translate-x-1/2 items-center space-x-8 text-2xl font-bold">
-          <div className="bg-primary/10 backdrop:-blur-sm rounded-xl px-6 py-3 flex items-center space-x-8 text-2xl font-bold shadow-md">
-            {navItems.map((item, key) => (
-              <a
-                key={key}
+        <div className="hidden md:flex absolute inset-x-0 justify-center">
+          <div className="bg-primary/10 backdrop:-blur-sm rounded-xl px-6 py-3 flex items-center space-x-8 text-2xl font-semibold shadow-md">
+            {navItems.map((item) => (
+              <motion.a
+                key={item.href}
                 href={item.href}
-                className="text-foreground/80 hover:text-blue-600 transition-colors duration-300"
+                whileHover={{ scale: 1.1, color: "#3b82f6" }}
+                transition={{ type: "spring", stiffness: 300 }}
+                className="text-foreground/80"
               >
                 {item.name}
-              </a>
+              </motion.a>
             ))}
           </div>
         </div>
 
         <button
           onClick={() => setIsMenuOpen((prev) => !prev)}
-          className="md:hidden p-2 text-foreground z-50"
-          aria-label={isMenuOpen ? "Close Menu" : "Open Menu"}
+          className="md:hidden p-2 text-foreground z-50 flex items-center justify-center"
+          aria-label={isMenuOpen ? "Fechar menu" : "Abrir menu"}
         >
-          {isMenuOpen ? <IoIosClose size={24} /> : <IoIosMenu size={24} />}{" "}
+          {isMenuOpen ? <IoIosClose size={32} /> : <IoIosMenu size={32} />}
         </button>
 
-        <div
-          className={cn(
-            "fixed inset-0 bg-background/95 backdrop-blur-md z-40 flex flex-col items-center justify-center",
-            "transition-all duration-300 md:hidden",
-            isMenuOpen
-              ? "opacity-100 pointer-events-auto"
-              : "opacity-0 pointer-events-none"
-          )}
-        >
-          <div className="flex flex-col space-y-8 text-xl">
-            {navItems.map((item, key) => (
-              <a
-                key={key}
-                href={item.href}
-                className="text-foreground/80 hover:text-primary transition-colors duration-300"
-                onClick={() => setIsMenuOpen(false)}
+        <AnimatePresence>
+          {isMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, y: "-100%" }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: "-100%" }}
+              transition={{ duration: 0.4, ease: "easeInOut" }}
+              className="fixed inset-0 bg-background/95 backdrop-blur-md z-40 flex flex-col items-center justify-center"
+            >
+              <motion.nav
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ delay: 0.2 }}
+                className="flex flex-col space-y-8 text-3xl font-semibold"
               >
-                {item.name}
-              </a>
-            ))}
-          </div>
-        </div>
+                {navItems.map((item) => (
+                  <motion.a
+                    key={item.href}
+                    href={item.href}
+                    onClick={() => setIsMenuOpen(false)}
+                    whileHover={{ scale: 1.1, color: "#3b82f6" }}
+                    transition={{ type: "spring", stiffness: 300 }}
+                    className="text-foreground/80"
+                  >
+                    {item.name}
+                  </motion.a>
+                ))}
+              </motion.nav>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </nav>
   );
