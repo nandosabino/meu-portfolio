@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "motion/react";
 import { cn } from "@/lib/utils";
 import {
   FaHtml5, FaCss3Alt, FaJs, FaReact, FaGithub, FaDocker, FaNode, FaBootstrap,

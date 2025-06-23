@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 import { useEffect, useState } from "react";
-import { IoIosClose, IoIosMenu } from "react-icons/io";
-import { motion, AnimatePresence } from "framer-motion";
+import { IoClose, IoMenu } from "react-icons/io5";
+import { motion, AnimatePresence } from "motion/react";
 
 const navItems = [
   { name: "Início", href: "#hero" },
@@ -42,9 +42,7 @@ export const Navbar = () => {
               <motion.a
                 key={item.href}
                 href={item.href}
-                whileHover={{ scale: 1.1, color: "#3b82f6" }}
-                transition={{ type: "spring", stiffness: 300 }}
-                className="text-foreground/80"
+                className="text-foreground/80 hover:text-primary transition-colors duration-300"
               >
                 {item.name}
               </motion.a>
@@ -57,7 +55,7 @@ export const Navbar = () => {
           className="md:hidden p-2 text-foreground z-50 flex items-center justify-center"
           aria-label={isMenuOpen ? "Fechar menu" : "Abrir menu"}
         >
-          {isMenuOpen ? <IoIosClose size={32} /> : <IoIosMenu size={32} />}
+          {isMenuOpen ? <IoClose size={32} /> : <IoMenu size={32} />}
         </button>
 
         <AnimatePresence>
@@ -77,16 +75,14 @@ export const Navbar = () => {
                 className="flex flex-col space-y-8 text-3xl font-semibold"
               >
                 {navItems.map((item) => (
-                  <motion.a
+                  <a
                     key={item.href}
                     href={item.href}
                     onClick={() => setIsMenuOpen(false)}
-                    whileHover={{ scale: 1.1, color: "#3b82f6" }}
-                    transition={{ type: "spring", stiffness: 300 }}
-                    className="text-foreground/80"
+                    className="text-foreground/80 hover:text-primary transition-colors duration-300"
                   >
                     {item.name}
-                  </motion.a>
+                  </a>
                 ))}
               </motion.nav>
             </motion.div>
