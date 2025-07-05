@@ -2,6 +2,7 @@ import { cn } from "@/lib/utils";
 import { useEffect, useState } from "react";
 import { IoClose, IoMenu } from "react-icons/io5";
 import { motion, AnimatePresence } from "motion/react";
+import { ThemeToggleMobile } from "@/components/ThemeToggle/ThemeToggleMobile";
 
 const navItems = [
   { name: "Início", href: "#hero" },
@@ -19,6 +20,14 @@ export const Navbar = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+  }, [isMenuOpen]);
 
   return (
     <nav
@@ -65,25 +74,27 @@ export const Navbar = () => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: "-100%" }}
               transition={{ duration: 0.4, ease: "easeInOut" }}
-              className="fixed inset-0 bg-background/95 backdrop-blur-md z-40 flex flex-col items-center justify-center"
+              className="fixed top-0 left-0 w-screen h-screen z-[9999] bg-background/95 backdrop-blur-md flex items-center justify-center px-8"
             >
               <motion.nav
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ delay: 0.2 }}
-                className="flex flex-col space-y-8 text-3xl font-semibold"
+                className="flex flex-col space-y-8 text-3xl font-semibold w-full max-w-md"
               >
                 {navItems.map((item) => (
                   <a
                     key={item.href}
                     href={item.href}
                     onClick={() => setIsMenuOpen(false)}
-                    className="text-foreground/80 hover:text-primary transition-colors duration-300"
+                    className="text-foreground/80 hover:text-primary active:bg-primary/10 active:text-primary px-6 py-3 rounded-xl transition-all duration-200"
                   >
                     {item.name}
                   </a>
                 ))}
+
+                <ThemeToggleMobile />
               </motion.nav>
             </motion.div>
           )}

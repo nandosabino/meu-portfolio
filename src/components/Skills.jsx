@@ -2,36 +2,100 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { cn } from "@/lib/utils";
 import {
-  FaHtml5, FaCss3Alt, FaJs, FaReact, FaGithub, FaDocker, FaNode, FaBootstrap,
+  FaHtml5,
+  FaCss3Alt,
+  FaJs,
+  FaReact,
+  FaGithub,
+  FaDocker,
+  FaNode,
+  FaBootstrap,
 } from "react-icons/fa";
 import {
-  SiTypescript, SiTailwindcss, SiNextdotjs, SiExpress, SiMongodb,
-  SiPrisma, SiMysql, SiPostman, SiOpenai,
+  SiTypescript,
+  SiTailwindcss,
+  SiNextdotjs,
+  SiExpress,
+  SiMongodb,
+  SiPrisma,
+  SiMysql,
+  SiPostman,
+  SiOpenai,
 } from "react-icons/si";
 import { TbApi } from "react-icons/tb";
 
 const skills = [
-  { name: "HTML", icon: <FaHtml5 />, category: "frontend" },
-  { name: "CSS", icon: <FaCss3Alt />, category: "frontend" },
-  { name: "JavaScript", icon: <FaJs />, category: "frontend" },
-  { name: "React", icon: <FaReact />, category: "frontend" },
-  { name: "TypeScript", icon: <SiTypescript />, category: "frontend" },
-  { name: "Tailwind CSS", icon: <SiTailwindcss />, category: "frontend" },
-  { name: "Next.js", icon: <SiNextdotjs />, category: "frontend" },
-  { name: "Bootstrap", icon: <FaBootstrap />, category: "frontend" },
-  { name: "Node.js", icon: <FaNode />, category: "backend" },
-  { name: "Express", icon: <SiExpress />, category: "backend" },
-  { name: "MongoDB", icon: <SiMongodb />, category: "backend" },
-  { name: "Prisma", icon: <SiPrisma />, category: "backend" },
-  { name: "MySQL", icon: <SiMysql />, category: "backend" },
-  { name: "APIs RESTful", icon: <TbApi />, category: "backend" },
-  { name: "Git/GitHub", icon: <FaGithub />, category: "tools" },
-  { name: "Docker", icon: <FaDocker />, category: "tools" },
-  { name: "Postman", icon: <SiPostman />, category: "tools" },
-  { name: "IA", icon: <SiOpenai />, category: "tools" },
+  { name: "HTML", icon: <FaHtml5 />, color: "#E34F26", category: "front-end" },
+  { name: "CSS", icon: <FaCss3Alt />, color: "#1572B6", category: "front-end" },
+  {
+    name: "JavaScript",
+    icon: <FaJs />,
+    color: "#F7DF1E",
+    category: "front-end",
+  },
+  { name: "React", icon: <FaReact />, color: "#61DAFB", category: "front-end" },
+  {
+    name: "TypeScript",
+    icon: <SiTypescript />,
+    color: "#3178C6",
+    category: "front-end",
+  },
+  {
+    name: "Tailwind CSS",
+    icon: <SiTailwindcss />,
+    color: "#38BDF8",
+    category: "front-end",
+  },
+  {
+    name: "Next.js",
+    icon: <SiNextdotjs />,
+    color: "#000000",
+    category: "front-end",
+  },
+  {
+    name: "Bootstrap",
+    icon: <FaBootstrap />,
+    color: "#7952B3",
+    category: "front-end",
+  },
+  { name: "Node.js", icon: <FaNode />, color: "#339933", category: "back-end" },
+  {
+    name: "Express",
+    icon: <SiExpress />,
+    color: "#000000",
+    category: "back-end",
+  },
+  {
+    name: "MongoDB",
+    icon: <SiMongodb />,
+    color: "#47A248",
+    category: "back-end",
+  },
+  {
+    name: "Prisma",
+    icon: <SiPrisma />,
+    color: "#0C344B",
+    category: "back-end",
+  },
+  { name: "MySQL", icon: <SiMysql />, color: "#4479A1", category: "back-end" },
+  {
+    name: "APIs RESTful",
+    icon: <TbApi />,
+    color: "#f97316",
+    category: "back-end",
+  },
+  {
+    name: "Git/GitHub",
+    icon: <FaGithub />,
+    color: "#181717",
+    category: "tools",
+  },
+  { name: "Docker", icon: <FaDocker />, color: "#2496ED", category: "tools" },
+  { name: "Postman", icon: <SiPostman />, color: "#FF6C37", category: "tools" },
+  { name: "IA", icon: <SiOpenai />, color: "#10A37F", category: "tools" },
 ];
 
-const categories = ["all", "frontend", "backend", "tools"];
+const categories = ["all", "front-end", "back-end", "tools"];
 
 const containerVariant = {
   hidden: { opacity: 0, y: 20 },
@@ -60,8 +124,15 @@ export const Skills = () => {
   );
 
   return (
-    <section id="skills" className="py-24 relative bg-secondary/30">
-      <div className="container mx-auto max-w-5xl p-4">
+    <section id="skills" className="py-16 sm:py-24 bg-secondary/30">
+      <motion.div
+        className="container mx-auto max-w-5xl p-4"
+        variants={containerVariant}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ delay: 0.3 }}
+      >
         <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">
           Minhas <span className="text-primary">Skills</span>
         </h2>
@@ -86,25 +157,34 @@ export const Skills = () => {
         <AnimatePresence mode="wait">
           <motion.div
             key={activeCategory}
+            className="grid grid-cols-[repeat(auto-fit,minmax(140px,1fr))] sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6"
             variants={containerVariant}
             initial="hidden"
             animate="visible"
             exit="hidden"
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+            transition={{ duration: 0.4, ease: "easeInOut" }}
           >
             {filteredSkills.map((skill) => (
               <motion.div
                 key={skill.name}
+                className="p-4 sm:p-6 rounded-lg flex items-center gap-4 bg-card border transition-transform duration-300 hover:scale-105"
                 variants={itemVariant}
-                className="bg-card border border-secondary/40 p-6 rounded-lg shadow-md flex items-center gap-4 transition-transform duration-300 hover:scale-105 hover:shadow-lg hover:border-primary"
               >
-                <div className="text-4xl text-primary">{skill.icon}</div>
-                <h3 className="font-semibold text-lg">{skill.name}</h3>
+                <div
+                  className="text-3xl sm:text-4xl text-primary"
+                  style={{ color: skill.color }}
+                >
+                  {skill.icon}
+                </div>
+
+                <h3 className="font-semibold text-base sm:text-lg">
+                  {skill.name}
+                </h3>
               </motion.div>
             ))}
           </motion.div>
         </AnimatePresence>
-      </div>
+      </motion.div>
     </section>
   );
 };

@@ -71,13 +71,22 @@
 
   html {
     @apply scroll-smooth;
-    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    transition: background-color 0.4s ease;
   }
 
   body {
-    @apply bg-background text-foreground transition-colors duration-300;
+    @apply bg-background text-foreground;
+    transition: background-color 0.4s ease;
     font-feature-settings: "rlig" 1, "calt" 1;
     font-family: "Inter", sans-serif;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
 }
 
@@ -120,7 +129,8 @@
 
 @utility cosmic-button {
   @apply px-6 py-2 rounded-full bg-primary text-primary-foreground font-medium 
-         transition-all duration-300 hover:bg-primary/80 hover:shadow-[0_0_12px_rgba(59,130,246,0.6)]
+         transition-all duration-300 hover:bg-primary/80 
+         hover:shadow-[0_0_12px_rgba(59,130,246,0.6)] 
          hover:scale-105 active:scale-95;
 }
 

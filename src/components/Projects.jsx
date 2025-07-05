@@ -34,7 +34,7 @@ const ProjectCard = ({ project }) => (
         alt={`Imagem do projeto ${project.title}`}
         loading="lazy"
         decoding="async"
-        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+        className="w-full h-full object-cover rounded-t-lg transition-transform duration-500 group-hover:scale-[1.03]"
         aria-hidden="true"
       />
     </div>
@@ -52,11 +52,11 @@ const ProjectCard = ({ project }) => (
       </div>
 
       <h3 className="text-lg font-semibold mb-1">{project.title}</h3>
-      <p className="text-muted-foreground text-sm mb-4 line-clamp-3">
+      <p className="text-muted-foreground text-sm leading-relaxed mb-4 line-clamp-3">
         {project.description}
       </p>
 
-      <div className="flex gap-4">
+      <div className="flex flex-wrap gap-4 mt-2">
         <a
           href={project.demoUrl}
           target="_blank"
@@ -82,7 +82,7 @@ const ProjectCard = ({ project }) => (
 
 export const Projects = () => {
   return (
-    <section id="projects" className="py-24 px-4 relative">
+    <section id="projects" className="py-16 sm:py-24 px-4 relative">
       <div className="container mx-auto max-w-5xl">
         <motion.div
           variants={containerVariant}
@@ -91,7 +91,7 @@ export const Projects = () => {
           viewport={{ once: true, amount: 0.2 }}
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center">
-            Projetos <span className="text-primary"> em Destaque</span>
+            Projetos <span className="text-primary">em Destaque</span>
           </h2>
 
           <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
@@ -99,7 +99,7 @@ export const Projects = () => {
             performance, design e experiência do usuário.
           </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {projects.map((project) => (
               <ProjectCard key={project.id} project={project} />
             ))}
@@ -110,7 +110,7 @@ export const Projects = () => {
               href="https://github.com/nandosabino"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-2 rounded-lg border border-primary text-primary hover:bg-primary hover:text-white transition"
+              className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-2 rounded-lg border border-primary text-primary hover:bg-primary hover:text-white transition"
               variants={itemVariant}
             >
               Veja meu GitHub
