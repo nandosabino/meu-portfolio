@@ -34,7 +34,7 @@ export const About = () => {
             className="w-full h-full rounded-2xl overflow-hidden shadow-md order-first md:order-last"
           >
             <img
-              src="/foto-de-perfil-teste.png"
+              src="/foto-de-perfil-teste.jpg"
               alt="Minha foto de perfil"
               className="w-full h-full object-cover"
               loading="lazy"
