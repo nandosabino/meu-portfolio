@@ -7,7 +7,7 @@ Com design **minimalista**, suporte a **tema claro/escuro** e animações discre
 
 ## Preview 🖼️
 
-![Preview do portfólio](./public/preview.png)  
+![Preview do portfólio](src/assets/Preview.png)  
 
 ---
 
